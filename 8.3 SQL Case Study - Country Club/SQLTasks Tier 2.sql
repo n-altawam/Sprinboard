@@ -145,7 +145,8 @@ WHERE cost > 30
 ORDER BY cost DESC;
 
 
-/* PART 2: SQLite
+/* PART 2: SQLite 
+/* --> COMPLETED IN SEPARATE FILE "SQLTasks Part2.ipynb"
 
 Export the country club data from PHPMyAdmin, and connect to a local SQLite instance from Jupyter notebook 
 for the following questions.  
