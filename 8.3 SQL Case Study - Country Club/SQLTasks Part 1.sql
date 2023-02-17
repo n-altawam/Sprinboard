@@ -49,7 +49,7 @@ Squash Court
 
 /* Q2: How many facilities do not charge a fee to members? */
 
-SELECT COUNT(name) FROM `Facilities` WHERE membercost = 0;
+SELECT COUNT(*) FROM `Facilities` WHERE membercost = 0;
 
 Answer: 4	
 
@@ -87,8 +87,9 @@ FROM `Facilities`;
 /* Q6: You'd like to get the first and last name of the last member(s)
 who signed up. Try not to use the LIMIT clause for your solution. */
 
-SELECT `firstname`,`surname` FROM `Members`  
-ORDER BY `joindate` DESC;
+SELECT firstname, surname, joindate
+FROM Members
+WHERE joindate = (SELECT MAX(joindate) FROM Members);
 
 
 /* Q7: Produce a list of all members who have used a tennis court.
@@ -97,13 +98,12 @@ formatted as a single column. Ensure no duplicate data, and order by
 the member name. */
 
 
-SELECT CONCAT(firstname, ' ', surname) AS member_name, 
-	MIN(name) AS court_name
+SELECT DISTINCT CONCAT(firstname, ' ', surname) AS member_name, 
+	name AS court_name
 FROM Members
 INNER JOIN Bookings USING (memid)
 INNER JOIN Facilities USING (facid)
-WHERE Facilities.name LIKE 'Tennis Court%'
-GROUP BY member_name
+WHERE name LIKE '%Tennis Court%'
 ORDER BY member_name;
 
 
@@ -113,16 +113,14 @@ different costs to members (the listed costs are per half-hour 'slot'), and
 the guest user's ID is always 0. Include in your output the name of the
 facility, the name of the member formatted as a single column, and the cost.
 Order by descending cost, and do not use any subqueries. */
-SELECT CONCAT(Members.firstname, ' ', Members.surname) AS member_name,
-       Facilities.name AS facility_name,
-       CASE WHEN Bookings.memid = 0 THEN Bookings.slots * Facilities.guestcost
-            ELSE Bookings.slots * Facilities.membercost END AS cost
-FROM Bookings
-INNER JOIN Facilities ON Bookings.facid = Facilities.facid
-LEFT JOIN Members ON Bookings.memid = Members.memid
-WHERE DATE(starttime) = '2012-09-14'
-  AND (Bookings.memid = 0 AND Bookings.slots * Facilities.guestcost > 30
-       OR Bookings.memid != 0 AND Bookings.slots * Facilities.membercost > 30)
+
+SELECT CONCAT(firstname, ' ', surname) AS member_name, name AS facility,
+CASE WHEN memid = 0 THEN guestcost * slots ELSE membercost * slots END AS cost
+FROM Members
+INNER JOIN Bookings USING (memid)
+INNER JOIN Facilities USING (facid)
+WHERE DATE(starttime)= '2012-09-14' 
+AND CASE WHEN memid = 0 THEN guestcost * slots ELSE membercost * slots END > 30
 ORDER BY cost DESC;
 
 
