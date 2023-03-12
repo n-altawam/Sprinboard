@@ -1,2 +1,5 @@
-
-Python.gitignore
+# capstone 2 temp files
+Capstone 2/temp/Exploring the NYC Airbnb Market/notebook.ipynb
+Capstone 2/temp/Exploring the NYC Airbnb Market/datasets/airbnb_room_type.xlsx
+Capstone 2/temp/Exploring the NYC Airbnb Market/datasets/airbnb_price.csv
+Capstone 2/temp/Exploring the NYC Airbnb Market/datasets/airbnb_last_review.tsv
