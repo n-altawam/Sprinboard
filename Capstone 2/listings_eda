@@ -1,4 +1,4 @@
-borough,neighbourhood,room_type_labeled,price,reviews_count,bathrooms,bedrooms,price_range_labeled
+borough,neighbourhood,room_type_encoded,price,reviews_count,bathrooms,bedrooms,price_range_encoded
 Brooklyn,Sunset Park,0,275,1,1.0,2.0,2
 Manhattan,Upper West Side,1,75,0,1.0,1.0,0
 Brooklyn,Bedford-Stuyvesant,1,60,0,1.0,1.0,1
