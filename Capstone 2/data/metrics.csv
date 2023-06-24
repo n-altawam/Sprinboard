@@ -1,5 +1,5 @@
 Metric,Value
-Mean Absolute Error (MAE),65.80304398058601
-Mean Squared Error (MSE),12546.768277819281
-Root Mean Squared Error (RMSE),0.7284782956785821
-R^2 Score,0.5306806272747717
+Mean Absolute Error (MAE),64.75062854096444
+Mean Squared Error (MSE),11752.418529443958
+Root Mean Squared Error (RMSE),0.7244854784068788
+R^2 Score,0.5248792084224441
